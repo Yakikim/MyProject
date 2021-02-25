@@ -5,6 +5,8 @@ this module is  The API gateway URL of the project.
 from flask import Flask, request
 import json
 import requests
+import os
+import signal
 
 def get_user_name_from_db(user_id):
     """
@@ -31,6 +33,12 @@ def get_user_name(user_id):
         return f"<H1 id='error'> no such user: {user_id} </H1>"
     else:
         return f"<H1 id='user'> {user_name} </H1>"
+
+@my_app.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    return 'Server stopped'
+
 
 if __name__ == '__main__':
     my_app.run(host="127.0.0.1", debug=True, port=5001)
