@@ -25,8 +25,8 @@ pipeline {
         }
         stage('run backend_testing.py') {
             steps {
-        timeout(time:5, unit:'DAYS') {
-        input message:'Approve deployment?', submitter: 'it-ops'
+        timeout(time:30, unit:'SECONDS') {
+       // input message:'Approve deployment?', submitter: 'it-ops'
         }
                 script {
                         bat 'python backend_testing.py'
@@ -43,7 +43,7 @@ pipeline {
         stage('run combined_testing.py') {
             steps {
                 script {
-                        bat 'pythoncombined_testing.py'
+                        bat 'python combined_testing.py'
                 }
             }
         }
