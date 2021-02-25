@@ -25,6 +25,9 @@ pipeline {
         }
         stage('run backend_testing.py') {
             steps {
+        timeout(time:5, unit:'DAYS') {
+        input message:'Approve deployment?', submitter: 'it-ops'
+        }
                 script {
                         bat 'python backend_testing.py'
                 }
