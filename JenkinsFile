@@ -4,19 +4,50 @@ pipeline {
         stage('checkout') {
             steps {
                 script {
-                    properties([pipelineTriggers([pollSCM('* * * * *')])])
+                    properties([pipelineTriggers([pollSCM('*/30 * * * *')])])
                 }
-                git 'https://github.com/Yakikim/DEVOPS.git'
+                git 'https://github.com/Yakikim/MyProject.git'
             }
         }
-        stage('run python') {
+        stage('run rest_app.py') {
             steps {
                 script {
-                    if (Boolean.valueOf(env.UNIX)) {
-                        sh 'Lecture7.py'
-                    } else {
-                        bat 'Lecture7.py'
-                    }
+                bat 'start /min python rest_app.py' 
+                }
+            }
+        }
+        stage('run web_app.py') {
+            steps {
+                script {
+                 bat 'start /min python web_app.py' 
+                }
+            }
+        }
+        stage('run backend_testing.py') {
+            steps {
+                script {
+                        bat 'python backend_testing.py'
+                }
+            }
+        }
+        stage('run frontend_testing.py') {
+            steps {
+                script {
+                        bat 'python frontend_testing.py'
+                }
+            }
+        }
+        stage('run combined_testing.py') {
+            steps {
+                script {
+                        bat 'pythoncombined_testing.py'
+                }
+            }
+        }
+        stage('run clean_environemnt.py') {
+            steps {
+                script {
+                        bat 'python clean_environemnt.py'
                 }
             }
         }
