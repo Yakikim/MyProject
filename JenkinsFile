@@ -21,12 +21,11 @@ pipeline {
                 script {
                  bat 'start /min python web_app.py' 
                 }
-                timeout(time:30, unit:'SECONDS')
             }
         }
         stage('run backend_testing.py') {
             steps {
-                script {
+                timeout(time:30, unit:'SECONDS') {
                         bat 'python backend_testing.py'
                 }
             }
