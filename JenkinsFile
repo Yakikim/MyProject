@@ -4,7 +4,7 @@ pipeline {
         stage('checkout') {
             steps {
                 script {
-                    properties([pipelineTriggers([pollSCM('*/30 * * * *')])])
+                    properties([pipelineTriggers([pollSCM('*/15 * * * *')])])
                 }
                 git 'https://github.com/Yakikim/MyProject.git'
             }
