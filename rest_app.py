@@ -54,7 +54,7 @@ def users(user_id):
             insert("users","user_id,user_name,creation_date",f"{user_id}, '{user_name}', '{datetime.datetime.now()}'")
             return json.dumps({'status': 'ok', 'user_added': user_name}), 200
     elif request.method == 'GET':
-        mycon = select("'Y'", "users", f"user_id = {user_id}")
+        mycon = select("user_name", "users", f"user_id = {user_id}")
         if mycon.rowcount > 0:
             for row in mycon:
                 return json.dumps({'status': 'ok', 'user_name': row[0]}), 200
