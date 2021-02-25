@@ -34,7 +34,7 @@ def get_user_name(user_id):
     else:
         return f"<H1 id='user'> {user_name} </H1>"
 
-@my_app.route('/stop_server')
+@my_app.route('/stop_server', methods=['GET'])
 def stop_server():
     os.kill(os.getpid(), signal.CTRL_C_EVENT)
     return 'Server stopped'

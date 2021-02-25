@@ -12,7 +12,7 @@ import signal
 
 app = Flask(__name__)
 
-@app.route('/stop_server')
+@app.route('/stop_server', methods=['GET'])
 def stop_server():
     os.kill(os.getpid(), signal.CTRL_C_EVENT)
     return 'Server stopped'
